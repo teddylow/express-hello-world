@@ -30,13 +30,15 @@ app.post('/', (req, res) => {
   const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19);
   console.log(`\n\nWebhook received ${timestamp}\n`);
   console.log(JSON.stringify(req.body, null, 2));
-    app.post(forward_url, {
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(req.body)
-});
+    app.post({
+    url: forward_url,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(req.body)
+  }); 
   res.status(200).end();
 });
-
 // Start the server
 app.listen(port, () => {
   console.log(`\nListening on port ${port}\n`);
