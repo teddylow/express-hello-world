@@ -3,6 +3,8 @@ const express = require('express');
 
 // Create an Express app
 const app = express();
+const forward_url = "https://cliq.zoho.com/api/v2/bots/whatsappstatus/incoming?zapikey=1001.d0b1df574913b4a026c66322a9f2d8d7.fa75a03521a23ddad04fd78cbf1c4f70";
+
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -29,9 +31,18 @@ app.post('/', (req, res) => {
   console.log(`\n\nWebhook received ${timestamp}\n`);
   console.log(JSON.stringify(req.body, null, 2));
   res.status(200).end();
-      
-});
 
+  try{
+    const response = await axios.post(forward_url, req.body, {
+      headers: {
+        'Content-Type': 'application/json'
+}});
+res.status(response.status).send(response.data);
+    console.log('✅ Webhook forwarded successfully');
+  }catch (error) {
+    console.error('❌ Error forwarding webhook:', error.message);
+    // Respond with a 500 or appropriate error status
+  }
 // Start the server
 app.listen(port, () => {
   console.log(`\nListening on port ${port}\n`);
