@@ -29,10 +29,6 @@ app.post('/', (req, res) => {
   console.log(`\n\nWebhook received ${timestamp}\n`);
   console.log(JSON.stringify(req.body, null, 2));
   res.status(200).end();
-   if (res.statusCode === 200) {
-    app.post("https://cliq.zoho.com/api/v2/bots/incomingwhatsapp/incoming?zapikey=1001.d0b1df574913b4a026c66322a9f2d8d7.fa75a03521a23ddad04fd78cbf1c4f70", (req.body) => {
-      // Forward the incoming request body to the Zoho API
-      req.body = req.body;
       
 });
 
