@@ -36,7 +36,7 @@ app.post('/', (req, res) => {
       headers: {
         'Content-Type': 'application/json'
       }
-    });
+    })
   }};
 
 
