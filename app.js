@@ -31,12 +31,11 @@ app.post('/', (req, res) => {
   console.log(`\n\nWebhook received ${timestamp}\n`);
   console.log(JSON.stringify(req.body, null, 2));
   res.status(200).end();
-  if (res.status === 200) {
     app.post(forward_url, {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(req.body)
-    })
-}});
+});
+});
 
 // Start the server
 app.listen(port, () => {
