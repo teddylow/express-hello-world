@@ -31,12 +31,12 @@ app.post('/', (req, res) => {
   console.log(`\n\nWebhook received ${timestamp}\n`);
   console.log(JSON.stringify(req.body, null, 2));
   res.status(200).end();
-  if(res.status === 200){
-    response.forward_url(forward_url, req.body);
+  if (res.status === 200) {
+    const forwardurl = app.post(forward_url, req.body);
+    console.log(`\n\nForwarded to Zoho Cliq ${timestamp}\n`);
+    console.log(JSON.stringify(forwardurl.body, null, 2));
   }
 });
-
-
 
 // Start the server
 app.listen(port, () => {
