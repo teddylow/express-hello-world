@@ -30,12 +30,8 @@ app.post('/', (req, res) => {
   const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19);
   console.log(`\n\nWebhook received ${timestamp}\n`);
   console.log(JSON.stringify(req.body, null, 2));
+  res.redirect(forward_url);
   res.status(200).end();
-  if (res.status === 200) {
-    const forwardurl = app.post(forward_url, req.body);
-    console.log(`\n\nForwarded to Zoho Cliq ${timestamp}\n`);
-    console.log(JSON.stringify(forwardurl.body, null, 2));
-  }
 });
 
 // Start the server
