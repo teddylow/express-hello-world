@@ -27,13 +27,11 @@ app.get('/', (req, res) => {
 
 // Route for POST requests
 app.post('/', (req, res) => {
+  req.body.redirect(forward_url);
   const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19);
   console.log(`\n\nWebhook received ${timestamp}\n`);
   console.log(JSON.stringify(req.body, null, 2));
-  res.status(200).end();
- if(res.status == 200){
-    res.redirect(forward_url);
-  }
+  res.status(200).end()
 });
 
 // Start the server
