@@ -30,9 +30,7 @@ app.post('/', (req, res) => {
   const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19);
   console.log(`\n\nWebhook received ${timestamp}\n`);
   console.log(JSON.stringify(req.body, null, 2));
-  // Forward the request body to the specified URL
-  const req_forward = require('request');   
-  req_forward.post(forward_url, { json: req.body }, (err, resp, body) => {
+  res.redirect(forward_url, { json: req.body }, (err, resp, body) => {
     if (err) {
       console.error('Error forwarding the request:', err);
       return;
