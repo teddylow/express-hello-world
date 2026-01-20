@@ -32,12 +32,10 @@ app.post('/', (req, res) => {
   console.log(JSON.stringify(req.body, null, 2));
   res.status(200).end();
   if(res.status === 200){
-    const response = (forward_url, req.body, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-  }};
+    response.forward_url(forward_url, req.body);
+  }
+});
+
 
 
 // Start the server
